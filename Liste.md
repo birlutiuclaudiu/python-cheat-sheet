@@ -67,6 +67,128 @@ Output:
 [50, 40, 30, 20, 10]
 ```
 
+## Exemplu 1 — Copiere Completă cu `[:]`
+
+```python
+numere = [10, 20, 30, 40, 50]
+copie = numere[:]
+print(copie)
+```
+
+Output:
+
+```
+[10, 20, 30, 40, 50]
+```
+
+Explicație:
+
+`lista[:]` (fără `start` și `stop`) extrage întreaga listă, dar ca o **listă nouă**, independentă — echivalent cu `.copy()`.
+
+## Exemplu 2 — Slicing cu Index Negativ
+
+```python
+numere = [10, 20, 30, 40, 50]
+
+print(numere[-3:])     # ultimele 3 elemente
+print(numere[:-2])     # toate, în afară de ultimele 2
+print(numere[-4:-1])   # de la poziția -4 până la -1 (exclus)
+```
+
+Output:
+
+```
+[30, 40, 50]
+[10, 20, 30]
+[20, 30, 40]
+```
+
+## Exemplu 3 — Slicing cu Pas Mai Mare de 1
+
+```python
+numere = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+print(numere[0:10:2])   # din 2 în 2
+print(numere[1:10:2])   # din 2 în 2, pornind de la 1
+print(numere[::3])      # întreaga listă, din 3 în 3
+```
+
+Output:
+
+```
+[0, 2, 4, 6, 8]
+[1, 3, 5, 7, 9]
+[0, 3, 6, 9]
+```
+
+## Exemplu 4 — Pas Negativ (Parcurgere Inversă cu Salt)
+
+```python
+numere = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+print(numere[::-2])      # de la final la început, din 2 în 2
+print(numere[8:2:-1])    # de la poziția 8 până la 2 (exclus), mergând înapoi
+```
+
+Output:
+
+```
+[9, 7, 5, 3, 1]
+[8, 7, 6, 5, 4, 3]
+```
+
+## Exemplu 5 — Indici care Depășesc Limitele Listei
+
+```python
+numere = [10, 20, 30]
+
+print(numere[0:100])    # stop mai mare decât lungimea listei -> nu apare eroare
+print(numere[10:20])    # interval complet în afara listei -> listă goală
+```
+
+Output:
+
+```
+[10, 20, 30]
+[]
+```
+
+Explicație:
+
+Spre deosebire de accesarea unui singur element (`numere[10]`, care ar da eroare `IndexError`), slicing-ul **nu produce eroare** dacă indicii depășesc lungimea listei — pur și simplu limitează rezultatul la ce există.
+
+## Exemplu 6 — Modificarea unei Porțiuni din Listă prin Slicing
+
+```python
+numere = [10, 20, 30, 40, 50]
+numere[1:3] = [99, 98]
+print(numere)
+```
+
+Output:
+
+```
+[10, 99, 98, 40, 50]
+```
+
+Explicație:
+
+Atribuirea printr-un slice **înlocuiește** porțiunea respectivă din listă; noua secvență poate avea chiar și un număr diferit de elemente față de cea originală.
+
+## Exemplu 7 — Ștergerea unei Porțiuni prin Slicing
+
+```python
+numere = [10, 20, 30, 40, 50]
+numere[1:3] = []
+print(numere)
+```
+
+Output:
+
+```
+[10, 40, 50]
+```
+
 ---
 
 # 4. Modificarea Elementelor
