@@ -200,52 +200,6 @@ With **keyword arguments**, you specify which parameter each value belongs to, s
 
 ---
 
-## Example 5 — Arbitrary Number of Arguments (`*args`)
-
-```python
-def total(*numbers):
-    print(sum(numbers))
-
-total(1, 2, 3)
-total(10, 20, 30, 40)
-```
-
-Output:
-
-```
-6
-100
-```
-
-Explanation:
-
-`*numbers` collects **any number of positional arguments** into a tuple, so the function can accept a variable amount of input.
-
----
-
-## Example 6 — Arbitrary Keyword Arguments (`**kwargs`)
-
-```python
-def print_info(**details):
-    for key, value in details.items():
-        print(key, ":", value)
-
-print_info(name="Alice", age=20, city="Paris")
-```
-
-Output:
-
-```
-name : Alice
-age : 20
-city : Paris
-```
-
-Explanation:
-
-`**details` collects **any number of keyword arguments** into a dictionary.
-
----
 
 # 5. The `return` Statement
 
@@ -427,7 +381,6 @@ def function_name(parameters):
 * **Parameters** are placeholders; **arguments** are the actual values passed in
 * Parameters can have **default values**, making them optional
 * **Keyword arguments** let you pass values by name, in any order
-* `*args` collects extra positional arguments; `**kwargs` collects extra keyword arguments
 * `return` sends a value back to the caller; without it, a function returns `None`
 * Variables created inside a function are **local** to that function
 

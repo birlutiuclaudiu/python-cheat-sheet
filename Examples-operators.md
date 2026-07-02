@@ -402,3 +402,350 @@ This example combines:
 - **Type conversion (`int()`)**
 - **Floor division (`//`)**
 - **Operator precedence**
+
+
+----------------------------------------
+# Python Expressions: Comprehensive Examples
+
+## 1. Floor Division (`//`) Examples
+
+### Example 1.1: Basic Floor Division
+```python
+result = 10 // 3
+print(result)
+```
+
+Step-by-step:
+1. `10 / 3 = 3.333...`
+2. Floor division rounds down → `3`
+
+**Result:** `3`
+
+---
+
+### Example 1.2: Floor Division with Negative Numbers
+```python
+result = -10 // 3
+print(result)
+```
+
+Step-by-step:
+1. `-10 / 3 = -3.333...`
+2. Floor division rounds down (towards negative infinity) → `-4`
+
+**Result:** `-4`
+
+---
+
+### Example 1.3: Floor Division with Floats
+```python
+result = 7.5 // 2.0
+print(result)
+```
+
+Step-by-step:
+1. `7.5 / 2.0 = 3.75`
+2. Floor division rounds down → `3.0` (returns float)
+
+**Result:** `3.0` (type: `float`)
+
+---
+
+## 2. Exponentiation (`**`) Examples
+
+### Example 2.1: Basic Power Operation
+```python
+result = 2 ** 3
+print(result)
+```
+
+Step-by-step:
+1. `2 ** 3 = 2 × 2 × 2 = 8`
+
+**Result:** `8`
+
+
+## 3. Float Conversion in Mixed Operations
+
+### Example 3.1: Integer + Float
+```python
+result = 5 + 2.5
+print(result)
+```
+
+Step-by-step:
+1. `5` (int) + `2.5` (float)
+2. Result type follows float → convert to float
+
+**Result:** `7.5` (type: `float`)
+
+---
+
+### Example 3.2: Division Always Returns Float
+```python
+result = 10 / 2
+print(result)
+```
+
+Step-by-step:
+1. Regular division `/` always returns float
+2. `10 / 2 = 5.0`
+
+**Result:** `5.0` (type: `float`)
+
+---
+
+### Example 3.3: Mixed Integer and Float Multiplication
+```python
+result = 3 * 2.4
+print(result)
+```
+
+Step-by-step:
+1. `3` (int) × `2.4` (float)
+2. Result converts to float
+
+**Result:** `7.2` (type: `float`)
+
+---
+
+## 4. Operator Precedence Examples
+
+### Example 4.1: Power Before Multiplication
+```python
+result = 2 * 3 ** 2
+print(result)
+```
+
+Step-by-step (left-to-right doesn't apply here):
+1. `3 ** 2 = 9` (exponentiation first)
+2. `2 * 9 = 18`
+
+**Result:** `18`
+
+**Rule:** `**` has higher precedence than `*`
+
+---
+
+### Example 4.2: Multiplication Before Addition
+```python
+result = 2 + 3 * 4
+print(result)
+```
+
+Step-by-step:
+1. `3 * 4 = 12` (multiplication first)
+2. `2 + 12 = 14`
+
+**Result:** `14`
+
+**Rule:** `*` has higher precedence than `+`
+
+---
+
+### Example 4.3: Floor Division at Same Level as Division
+```python
+result = 20 / 4 // 2
+print(result)
+```
+
+Step-by-step (left-to-right, same precedence):
+1. `20 / 4 = 5.0` (left-to-right)
+2. `5.0 // 2 = 2.0`
+
+**Result:** `2.0` (type: `float`)
+
+---
+
+## 5. Complex Mixed Operations
+
+### Example 5.1: Power + Floor Division + Addition
+```python
+result = 2 ** 3 + 10 // 4 - 1
+print(result)
+```
+
+Step-by-step:
+1. `2 ** 3 = 8` (exponentiation)
+2. `10 // 4 = 2` (floor division)
+3. `8 + 2 = 10` (addition, left-to-right)
+4. `10 - 1 = 9` (subtraction)
+
+**Result:** `9`
+
+---
+
+### Example 5.2: All Operators with Float Conversion
+```python
+result = 5.0 + 2 ** 2 * 3 // 2
+print(result)
+```
+
+Step-by-step:
+1. `2 ** 2 = 4` (exponentiation)
+2. `4 * 3 = 12` (multiplication)
+3. `12 // 2 = 6` (floor division)
+4. `5.0 + 6 = 11.0` (addition with float → result is float)
+
+**Result:** `11.0` (type: `float`)
+
+---
+
+### Example 5.3: Parentheses Override Precedence
+```python
+result = (2 + 3) ** 2
+print(result)
+```
+
+Step-by-step:
+1. `(2 + 3) = 5` (parentheses first)
+2. `5 ** 2 = 25`
+
+**Result:** `25`
+
+---
+
+### Example 5.4: Complex Expression with Multiple Float Operations
+```python
+result = (10 / 2 + 3) * 2 ** 2 // 3
+print(result)
+```
+
+Step-by-step:
+1. `10 / 2 = 5.0` (division)
+2. `5.0 + 3 = 8.0` (addition in parentheses)
+3. `2 ** 2 = 4` (exponentiation)
+4. `8.0 * 4 = 32.0` (multiplication)
+5. `32.0 // 3 = 10.0` (floor division with float → result is float)
+
+**Result:** `10.0` (type: `float`)
+
+---
+
+## 6. Type Conversion with Explicit Casting
+
+### Example 6.1: Converting Float to Int
+```python
+result = int(7.9) + 5
+print(result)
+```
+
+Step-by-step:
+1. `int(7.9) = 7` (truncates, doesn't round)
+2. `7 + 5 = 12`
+
+**Result:** `12`
+
+---
+
+### Example 6.2: Converting Int to Float
+```python
+result = float(5) / 2
+print(result)
+```
+
+Step-by-step:
+1. `float(5) = 5.0`
+2. `5.0 / 2 = 2.5`
+
+**Result:** `2.5` (type: `float`)
+
+---
+
+### Example 6.3: Mixed Casting and Operations
+```python
+result = int(3.7) ** 2 + float(5) / 2
+print(result)
+```
+
+Step-by-step:
+1. `int(3.7) = 3`
+2. `3 ** 2 = 9`
+3. `float(5) = 5.0`
+4. `5.0 / 2 = 2.5`
+5. `9 + 2.5 = 11.5`
+
+**Result:** `11.5` (type: `float`)
+
+---
+
+## 7. Modulo (`%`) with Float Conversion
+
+### Example 7.1: Modulo with Integers
+```python
+result = 10 % 3
+print(result)
+```
+
+Step-by-step:
+1. `10 / 3 = 3` remainder `1`
+2. `10 % 3 = 1`
+
+**Result:** `1`
+
+---
+
+### Example 7.2: Modulo in Complex Expression
+```python
+result = 10 % 3 + 2.5 * 2
+print(result)
+```
+
+Step-by-step:
+1. `10 % 3 = 1`
+2. `2.5 * 2 = 5.0`
+3. `1 + 5.0 = 6.0` (converts to float)
+
+**Result:** `6.0` (type: `float`)
+
+---
+
+## 8. Operator Precedence Table (High to Low)
+
+| Precedence | Operators | Description |
+|---|---|---|
+| 1 (Highest) | `**` | Exponentiation (right-to-left) |
+| 2 | `+x`, `-x`, `~x` | Unary plus, minus, bitwise NOT |
+| 3 | `*`, `/`, `//`, `%` | Multiplication, division, floor division, modulo (left-to-right) |
+| 4 | `+`, `-` | Addition, subtraction (left-to-right) |
+
+---
+
+## 9. Key Takeaways
+
+✅ **Float propagation**: If any operand is a float, the result is typically float
+✅ **Floor division (`//`)**: Always rounds down (towards negative infinity)
+✅ **True division (`/`)**: Always returns a float
+✅ **Exponentiation (`**`)**: Higher precedence than `*` and `/`
+✅ **Left-to-right**: Operators of same precedence are evaluated left-to-right (except `**`)
+✅ **Parentheses**: Override any precedence rules
+
+---
+
+## 10. Practice Expressions
+
+Try evaluating these before running them:
+
+```python
+# Challenge 1
+result = 3 ** 2 - 2 * 4 + 1
+
+# Challenge 2
+result = 10 // 3 + 5.5 - 2
+
+# Challenge 3
+result = (8 + 2) / 2 ** 2 * 3
+
+# Challenge 4
+result = 2 ** 3 ** 2
+
+# Challenge 5
+result = 10 - 3 * 2 // 4 + 1.5
+```
+
+**Answers:**
+- Challenge 1: `2` (9 - 8 + 1)
+- Challenge 2: `6.5` (3 + 5.5 - 2)
+- Challenge 3: `7.5` (10 / 4 * 3)
+- Challenge 4: `512` (2 ** 9, right-to-left)
+- Challenge 5: `10.5` (3 * 2 = 6, 6 // 4 = 1, then 10 - 1 + 1.5 = 10.5)

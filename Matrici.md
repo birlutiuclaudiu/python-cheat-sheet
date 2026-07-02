@@ -120,7 +120,7 @@ Output:
 
 ---
 
-# 5. Matricea Identitate (List Comprehension cu Condiție)
+# 5. List Comprehension cu Condiție generare matrice
 
 Matricea identitate are `1` pe diagonala principală și `0` în rest.
 
@@ -145,35 +145,6 @@ Explicație:
 
 Pentru fiecare poziție `(r, c)`, punem `1` dacă suntem pe diagonală (`r == c`), altfel punem `0`.
 
----
-
-# 6. Transpusa unei Matrice
-
-Transpusa schimbă rândurile cu coloanele: elementul de pe poziția `(r, c)` ajunge pe poziția `(c, r)`.
-
-```python
-matrice = [
-    [1, 2, 3],
-    [4, 5, 6]
-]
-
-transpusa = [[rand[c] for rand in matrice] for c in range(len(matrice[0]))]
-
-for rand in transpusa:
-    print(rand)
-```
-
-Output:
-
-```
-[1, 4]
-[2, 5]
-[3, 6]
-```
-
-Explicație:
-
-Pentru fiecare coloană `c` din matricea originală, construim un rând nou luând elementul `c` din **fiecare** rând al matricei originale.
 
 ---
 
@@ -195,77 +166,14 @@ for rand in matrice:
 print(suma)
 ```
 
-## Cu list comprehension + `sum()`
 
-```python
-matrice = [
-    [1, 2, 3],
-    [4, 5, 6]
-]
-
-suma = sum([element for rand in matrice for element in rand])
-print(suma)
-```
-
-Output (identic pentru ambele variante):
-
-```
-21
-```
-
-Explicație:
-
-`[element for rand in matrice for element in rand]` "aplatizează" matricea într-o singură listă `[1, 2, 3, 4, 5, 6]`, iar `sum()` adună toate elementele.
 
 ---
 
-# 8. Suma pe Fiecare Rând / Fiecare Coloană
-
-## Suma Fiecărui Rând
-
-```python
-matrice = [
-    [1, 2, 3],
-    [4, 5, 6]
-]
-
-sume_randuri = [sum(rand) for rand in matrice]
-print(sume_randuri)
-```
-
-Output:
-
-```
-[6, 15]
-```
-
-## Suma Fiecărei Coloane
-
-```python
-matrice = [
-    [1, 2, 3],
-    [4, 5, 6]
-]
-
-nr_coloane = len(matrice[0])
-sume_coloane = [sum(rand[c] for rand in matrice) for c in range(nr_coloane)]
-print(sume_coloane)
-```
-
-Output:
-
-```
-[5, 7, 9]
-```
-
----
-
-# 9. Rezumat
+# 8. Rezumat
 
 * O matrice este o **listă de liste**; fiecare listă interioară este un rând.
 * Accesare: `matrice[rand][coloana]`.
 * Parcurgere: două bucle `for` imbricate (una pentru rânduri, una pentru elemente).
 * Creare cu list comprehension: `[[expresie for c in range(coloane)] for r in range(linii)]`.
-* Matricea identitate folosește `1 if r == c else 0`.
-* Transpusa: `[[rand[c] for rand in matrice] for c in range(nr_coloane)]`.
-* Suma tuturor elementelor: `sum(element for rand in matrice for element in rand)`.
+

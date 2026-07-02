@@ -229,24 +229,6 @@ Explicație:
 
 `range(len(fructe))` generează indecșii `0, 1, 2`, utili când avem nevoie și de poziția elementului, nu doar de valoare (deși pentru acest caz `enumerate()` este de obicei preferat).
 
----
-
-# 7. `range()` Transformat în Listă
-
-`range()` nu este o listă, dar poate fi convertit într-una cu `list()`.
-
-```python
-r = range(1, 6)
-print(r)              # obiectul range, nu o listă
-print(list(r))        # lista propriu-zisă
-```
-
-Output:
-
-```
-range(1, 6)
-[1, 2, 3, 4, 5]
-```
 
 ---
 

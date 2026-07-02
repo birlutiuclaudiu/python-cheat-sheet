@@ -657,32 +657,6 @@ Explicație:
 
 ---
 
-# 13. Ridicarea Manuală a unei Excepții — `raise`
-
-```python
-def imparte(a, b):
-    if b == 0:
-        raise ZeroDivisionError("Nu poți împărți la zero, chiar dacă e cerut manual!")
-    return a / b
-
-try:
-    imparte(10, 0)
-except ZeroDivisionError as eroare:
-    print("Eroare prinsă:", eroare)
-```
-
-Output:
-
-```
-Eroare prinsă: Nu poți împărți la zero, chiar dacă e cerut manual!
-```
-
-Explicație:
-
-`raise` permite declanșarea manuală a unei excepții, cu un mesaj personalizat — util pentru a valida datele înainte ca o eroare "reală" să apară mai târziu în program.
-
----
-
 # 14. Rezumat
 
 * O **excepție** este o eroare apărută la rulare, care oprește programul dacă nu e tratată
@@ -698,4 +672,3 @@ Explicație:
 * se pot trata mai multe excepții cu mai multe blocuri `except`, sau grupate `except (A, B)`
 * `Exception` prinde aproape orice eroare — folosit ca plasă de siguranță
 * `else` rulează dacă nu a fost nicio eroare; `finally` rulează întotdeauna
-* `raise` ridică manual o excepție, cu mesaj personalizat

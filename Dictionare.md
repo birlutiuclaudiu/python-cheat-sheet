@@ -293,44 +293,6 @@ s2 -> Bogdan 8.0
 
 ---
 
-# 9. Dictionary Comprehension
-
-La fel ca la liste, un dicționar poate fi creat compact, printr-o expresie similară cu list comprehension.
-
-Sintaxă:
-
-```python
-dict_nou = {cheie: valoare for element in iterabil}
-```
-
-## Exemplu 1 — Numere și Pătratele Lor
-
-```python
-patrate = {n: n ** 2 for n in range(1, 6)}
-print(patrate)
-```
-
-Output:
-
-```
-{1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
-```
-
-## Exemplu 2 — Cu Condiție (Doar Numerele Pare)
-
-```python
-patrate_pare = {n: n ** 2 for n in range(1, 8) if n % 2 == 0}
-print(patrate_pare)
-```
-
-Output:
-
-```
-{2: 4, 4: 16, 6: 36}
-```
-
----
-
 # 10. Rezumat
 
 * Un **dicționar** stochează perechi **cheie-valoare**: `{"cheie": "valoare"}`

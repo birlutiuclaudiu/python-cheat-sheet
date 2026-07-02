@@ -303,21 +303,6 @@ Output:
 [3, 2, 1]
 ```
 
-## `extend()` — Adaugă Toate Elementele Dintr-o Altă Listă
-
-```python
-a = [1, 2]
-b = [3, 4]
-a.extend(b)
-print(a)
-```
-
-Output:
-
-```
-[1, 2, 3, 4]
-```
-
 ## `len()`, `index()`, `count()`
 
 ```python
@@ -369,22 +354,6 @@ para
 banana
 ```
 
-## Parcurgere cu Index — `enumerate()`
-
-```python
-fructe = ["mar", "para", "banana"]
-
-for index, fruct in enumerate(fructe):
-    print(index, "-", fruct)
-```
-
-Output:
-
-```
-0 - mar
-1 - para
-2 - banana
-```
 
 ---
 
@@ -445,7 +414,7 @@ Explicație:
 * O **listă** este ordonată, mutabilă, poate conține tipuri diferite: `[1, "a", True]`
 * Indexare: `lista[0]` (primul), `lista[-1]` (ultimul)
 * Slicing: `lista[start:stop:pas]`, capătul `stop` e exclus
-* Metode principale: `append`, `insert`, `remove`, `pop`, `sort`, `reverse`, `extend`, `clear`
+* Metode principale: `append`, `insert`, `remove`, `pop`, `sort`, `reverse`, `clear`
 * `len()`, `index()`, `count()` oferă informații despre listă
 * Parcurgere cu `for element in lista` sau `for i, element in enumerate(lista)`
 * O listă poate conține alte liste (liste imbricate → matrici)

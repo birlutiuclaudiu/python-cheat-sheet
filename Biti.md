@@ -1,6 +1,6 @@
 # Biți în Python — Conversie în Baza 2 și Operații (Numere Pozitive)
 
-Acest document explică cum se convertesc numerele între baza 10 și baza 2, și cum funcționează operațiile pe biți (`&`, `|`, `^`, `~`) în Python.
+Acest document explică cum se convertesc numerele între baza 10 și baza 2, și cum funcționează operațiile pe biți (`&`, `|`, `^`, `~`, `<<`, `>>`) în Python.
 
 ---
 
@@ -19,21 +19,6 @@ Exemplu: `13` → baza 2
 
 Citim resturile de jos în sus: `1101` → `13 = 1101` (baza 2)
 
-```python
-def in_baza_2(n):
-    if n == 0:
-        return "0"
-    rezultat = ""
-    while n > 0:
-        rest = n % 2
-        rezultat = str(rest) + rezultat   # adăugăm la început
-        n = n // 2
-    return rezultat
-
-print(in_baza_2(13))     # 1101
-print(bin(13))           # 0b1101  (varianta built-in din Python, pentru verificare)
-```
-
 ---
 
 # 2. Conversie din Baza 2 în Baza 10 — Algoritm
@@ -50,19 +35,6 @@ cifre:                     1 1 0 1
 = 1*8 + 1*4 + 0*2 + 1*1
 = 8 + 4 + 0 + 1
 = 13
-```
-
-```python
-def in_baza_10(binar):
-    rezultat = 0
-    putere = 0
-    for cifra in reversed(binar):     # parcurgem string-ul de la dreapta la stânga
-        rezultat += int(cifra) * (2 ** putere)
-        putere += 1
-    return rezultat
-
-print(in_baza_10("1101"))    # 13
-print(int("1101", 2))        # 13  (varianta built-in din Python, pentru verificare)
 ```
 
 ---
@@ -100,6 +72,24 @@ print(a ^ b)    # 1100 ^ 1010 = 0110 -> 6
 
 ```python
 print(~a)       # ~12 -> -13
+```
+
+### LEFT SHIFT (`<<`) — Deplasează Biții la Stânga
+
+`n << k` mută toți biții lui `n` cu `k` poziții spre stânga, completând cu `0` în dreapta. Este echivalent cu **`n * 2^k`**.
+
+```python
+print(a << 2)   # 0001100 << 2 = 0110000 -> 48   (12 * 2^2 = 48)
+print(b << 1)   # 0001010 << 1 = 0010100 -> 20   (10 * 2^1 = 20)
+```
+
+### RIGHT SHIFT (`>>`) — Deplasează Biții la Dreapta
+
+`n >> k` mută toți biții lui `n` cu `k` poziții spre dreapta, eliminând biții din capătul din dreapta. Pentru numere pozitive, este echivalent cu **împărțire întreagă `n // 2^k`**.
+
+```python
+print(a >> 2)   # 0001100 >> 2 = 0000011 -> 3    (12 // 2^2 = 3)
+print(b >> 1)   # 0001010 >> 1 = 0000101 -> 5    (10 // 2^1 = 5)
 ```
 
 ---
@@ -147,6 +137,28 @@ print(bin(rezultat_xor))       # 0b10111
 print(~x)                      # ~45 -> -(45+1) = -46
 ```
 
+### LEFT SHIFT (`<<`)
+
+```python
+rezultat_shl = x << 1
+print(rezultat_shl)            # 0101101 << 1 = 1011010 -> 90   (45 * 2 = 90)
+print(bin(rezultat_shl))       # 0b1011010
+
+rezultat_shl2 = y << 2
+print(rezultat_shl2)           # 0111010 << 2 = 11101000 -> 232 (58 * 4 = 232)
+```
+
+### RIGHT SHIFT (`>>`)
+
+```python
+rezultat_shr = x >> 1
+print(rezultat_shr)            # 0101101 >> 1 = 0010110 -> 22   (45 // 2 = 22, bitul de 1 se pierde)
+print(bin(rezultat_shr))       # 0b10110
+
+rezultat_shr2 = y >> 3
+print(rezultat_shr2)           # 0111010 >> 3 = 0000111 -> 7    (58 // 8 = 7)
+```
+
 ---
 
 ## Exemplu 3 — Numărul 64 și Operații cu El
@@ -160,11 +172,41 @@ print(n | 12)           # 1000000 | 0001100 = 1001100 -> 76
 # verificare: 1001100 -> 64+8+4 = 76
 print(n ^ 12)            # 1000000 ^ 0001100 = 1001100 -> 76 (același rezultat ca OR, pentru că n și 12 nu au biți comuni)
 print(~n)                # ~64 -> -(64+1) = -65
+print(n << 1)             # 1000000 << 1 = 10000000 -> 128 (64 * 2 = 128)
+print(n >> 6)             # 1000000 >> 6 = 0000001 -> 1    (64 // 64 = 1)
+print(n >> 7)             # 1000000 >> 7 = 0000000 -> 0    (bitul de 1 iese complet din număr)
 ```
 
 ---
 
-# 4. Rezumat
+# 4. Operatorii de Shift (`<<` și `>>`) — Explicație Detaliată
+
+| Operator | Nume | Efect | Echivalent aritmetic (numere pozitive) |
+|---|---|---|---|
+| `n << k` | Left shift | mută biții spre stânga cu `k` poziții, completează cu `0` în dreapta | `n * 2^k` |
+| `n >> k` | Right shift | mută biții spre dreapta cu `k` poziții, elimină biții din dreapta | `n // 2^k` (împărțire întreagă) |
+
+## Observații importante
+
+* **`<<` dublează valoarea** la fiecare poziție deplasată: `n << 1` = `n * 2`, `n << 2` = `n * 4`, `n << 3` = `n * 8` etc.
+* **`>>` înjumătățește valoarea** (rotunjit în jos) la fiecare poziție: `n >> 1` = `n // 2`, `n >> 2` = `n // 4` etc.
+* La `>>`, biții care "ies" din capătul din dreapta sunt **pierduți definitiv** — de aceea rezultatul este o împărțire întreagă, nu una exactă.
+* Ambii operatori funcționează doar cu numere **întregi**; `k` (numărul de poziții) trebuie să fie un întreg **≥ 0**, altfel Python aruncă `ValueError: negative shift count`.
+
+```python
+print(5 << -1)   # ValueError: negative shift count
+```
+
+* Deplasarea peste toți biții semnificativi ai unui număr pozitiv duce la `0` la `>>`, respectiv la un număr foarte mare la `<<` (Python nu are limită fixă de biți pentru `int`, spre deosebire de alte limbaje).
+
+```python
+print(1 >> 5)     # 0   (bitul unic iese din număr)
+print(1 << 5)     # 32  (1 * 2^5)
+```
+
+---
+
+# 5. Rezumat
 
 * **Baza 10 → Baza 2:** împărțiri repetate la 2, resturile citite de jos în sus
 * **Baza 2 → Baza 10:** fiecare cifră × puterea lui 2 corespunzătoare poziției, apoi se adună
@@ -176,3 +218,5 @@ print(~n)                # ~64 -> -(64+1) = -65
 | `\|` | OR  | 1 dacă cel puțin un bit este 1 |
 | `^`  | XOR | 1 dacă biții sunt diferiți |
 | `~`  | NOT | inversează toți biții (`~n == -(n+1)`) |
+| `<<` | Left shift | deplasează biții la stânga, echivalent `n * 2^k` |
+| `>>` | Right shift | deplasează biții la dreapta, echivalent `n // 2^k` |

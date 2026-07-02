@@ -1,6 +1,6 @@
-# Modulul `random` în Python — `random()`, `randint()`, `randrange()` și Exemple
+# Modulul `random` în Python — `random()`, `randint()`, `randrange()`
 
-Acest document explică cele mai folosite funcții din modulul **`random`**, folosite pentru a genera valori aleatoare.
+Acest document explică cele mai folosite funcții din modulul **`random`**, folosite pentru a genera valori aleatoare, cu exemple, comparații și atenționări la capcanele frecvente.
 
 ---
 
@@ -42,29 +42,11 @@ Output (exemplu, valoarea diferă la fiecare rulare):
 0.6741253771221944
 ```
 
-## Exemplu 2 — Generarea unui Număr Zecimal într-un Interval Oarecare
-
-```python
-import random
-
-minim = 5
-maxim = 10
-
-numar = minim + random.random() * (maxim - minim)
-print(numar)
-```
-
-Output (exemplu):
-
-```
-7.930212819417322
-```
-
 Explicație:
 
 `random.random()` dă mereu un număr între 0 și 1; înmulțind cu lungimea intervalului și adunând `minim`, obținem un număr aleator în orice interval dorit.
 
-## Exemplu 3 — Simularea unei Șanse/Probabilități (30%)
+## Exemplu 2 — Simularea unei Șanse/Probabilități (30%)
 
 ```python
 import random
@@ -87,44 +69,6 @@ Explicație:
 
 Deoarece `random.random()` returnează valori uniform distribuite între `0.0` și `1.0`, condiția `random.random() < 0.3` este adevărată în aproximativ 30% din cazuri.
 
-## Exemplu 4 — Generarea unui Preț cu Două Zecimale
-
-```python
-import random
-
-pret = round(random.random() * 100, 2)
-print(pret)
-```
-
-Output (exemplu):
-
-```
-57.42
-```
-
-Explicație:
-
-`round(x, 2)` rotunjește numărul la 2 zecimale, util când se generează valori de tip preț/procent.
-
-## Exemplu 5 — Generarea a Mai Multor Numere Zecimale
-
-```python
-import random
-
-for i in range(5):
-    print(round(random.random(), 3))
-```
-
-Output (exemplu):
-
-```
-0.128
-0.734
-0.951
-0.062
-0.489
-```
-
 ---
 
 # 3. `random.randint(a, b)` — Număr Întreg Aleator, Capete Incluse
@@ -137,6 +81,18 @@ random.randint(a, b)
 
 * returnează un număr **întreg** aleator, `a <= x <= b`
 * **ambele capete sunt incluse**
+
+## ⚠️ ATENȚIE — `a > b` dă eroare, nu rezultat gol
+
+```python
+random.randint(4, 3)
+```
+
+```
+ValueError: empty range for randrange() (4, 4, -1)
+```
+
+Intern, `randint(a, b)` apelează `randrange(a, b+1)`. Deci `randint(4, 3)` devine `randrange(4, 4)` — interval gol, de unde eroarea. Regula e simplă: **`a` trebuie să fie ≤ `b`**, altfel Python nu are din ce alege.
 
 ## Exemplu 1 — Zar Simulat (1-6)
 
@@ -308,6 +264,12 @@ random.randrange(start, stop, pas)
 * dacă se dă un singur argument, se consideră `start = 0`
 * al treilea argument (`pas`) este opțional
 
+| Formă | Exemplu | Interval posibil |
+|---|---|---|
+| `randrange(stop)` | `random.randrange(10)` | `0` până la `9` (10 exclus) |
+| `randrange(start, stop)` | `random.randrange(3, 10)` | `3` până la `9` (10 exclus) |
+| `randrange(start, stop, step)` | `random.randrange(0, 10, 2)` | `0, 2, 4, 6, 8` (pas de 2) |
+
 ## Exemplu 1 — Un Singur Argument
 
 ```python
@@ -444,12 +406,69 @@ Output (exemplu):
 
 ---
 
-# 5. `randint()` vs. `randrange()` — Diferența
+## ⚠️ ATENȚIE — Limita superioară (`stop`) este întotdeauna EXCLUSĂ
 
-| Funcție | Capătul final | Pas |
-|---|---|---|
-| `random.randint(a, b)` | **inclus** | nu |
-| `random.randrange(a, b)` | **exclus** (ca la `range()`) | da, opțional |
+Cea mai frecventă greșeală. Spre deosebire de `random.randint(a, b)`, unde **b este inclus**, la `randrange(start, stop)`, **stop NU este inclus**.
+
+```python
+random.randint(3, 10)     # poate returna 3, 4, ..., 10  (10 INCLUS)
+random.randrange(3, 10)   # poate returna 3, 4, ..., 9   (10 EXCLUS)
+```
+
+> **Regulă mnemonică:** `randrange` se comportă exact ca `range` — capătul din dreapta nu se atinge niciodată.
+
+## ⚠️ ATENȚIE — `start >= stop` dă eroare (`ValueError`), nu listă goală
+
+Spre deosebire de `range(a, b)`, care doar produce o secvență **goală** dacă `a >= b`, funcția `random.randrange(a, b)` **aruncă excepție** în același caz, pentru că nu are din ce alege un număr aleator.
+
+```python
+list(range(5, 3))          # -> []  (nicio eroare, doar gol)
+random.randrange(5, 3)     # -> ValueError: empty range for randrange() (5, 3, -5)
+```
+
+## ⚠️ ATENȚIE — `step` greșit sau `0` provoacă erori
+
+```python
+random.randrange(0, 10, 0)   # -> ValueError: zero step for randrange()
+```
+
+Dacă `step` este negativ, `start` trebuie să fie **mai mare** decât `stop`, altfel intervalul e gol și apare eroare:
+
+```python
+random.randrange(10, 0, -2)  # OK -> alege din {10, 8, 6, 4, 2}
+random.randrange(0, 10, -2)  # -> ValueError: interval gol (direcție greșită)
+```
+
+## ⚠️ ATENȚIE — Argumentele trebuie să fie întregi
+
+`randrange()` nu acceptă valori `float`:
+
+```python
+random.randrange(1.5, 10)   # -> ValueError: non-integer arg 1 for randrange()
+```
+
+Dacă ai nevoie de numere reale aleatoare, folosește `random.uniform(a, b)`, nu `randrange`.
+
+## Exemple corecte de utilizare
+
+```python
+import random
+
+random.randrange(100)          # 0..99
+random.randrange(1, 7)         # simulare zar clasic fără fața 7 -> 1..6
+random.randrange(0, 100, 5)    # multipli de 5 din 0..95
+random.randrange(10, 0, -1)    # numărătoare descrescătoare 10..1
+```
+
+---
+
+# 5. `randint()` vs. `randrange()` vs. `range()` — Diferența
+
+| Funcție | `stop` inclus? | Comportament la `start >= stop` | Pas | Tip valori |
+|---|---|---|---|---|
+| `range(a, b)` | ❌ Nu | Secvență **goală** (fără eroare) | da | doar `int` |
+| `random.randrange(a, b)` | ❌ Nu | **Eroare** (`ValueError`) | da, opțional | doar `int` |
+| `random.randint(a, b)` | ✅ Da | **Eroare** (`ValueError`) | nu | doar `int` |
 
 ```python
 import random
@@ -485,11 +504,12 @@ Prea mic!
 
 ---
 
-# 7. Rezumat
+# 7. Rezumat Final
 
 * `import random` — obligatoriu înainte de a folosi modulul
 * `random.random()` — float aleator, `0.0 <= x < 1.0`, util pentru probabilități și valori zecimale
-* `random.randint(a, b)` — întreg aleator, **capete incluse**
-* `random.randrange(start, stop, pas)` — ca `range()`, **`stop` exclus**, pas opțional
-* `randint(a, b)` include `b`; `randrange(a, b)` **nu** include `b`
+* `random.randint(a, b)` — întreg aleator, **capete incluse** (`a <= x <= b`); dacă `a > b` → `ValueError`
+* `random.randrange(start, stop, pas)` — ca `range()`: **`stop` exclus**, pas opțional; dacă `start >= stop` (pas pozitiv) → `ValueError`, spre deosebire de `range()` care doar dă un rezultat gol
+* `randint(a, b)` include `b`; `randrange(a, b)` **nu** include `b` — aceasta e diferența esențială de reținut pentru examen
+* toate primesc doar valori **întregi**; pentru numere reale aleatoare se folosește `random.uniform(a, b)`
 * toate pot fi combinate cu bucle `for` sau list comprehension pentru a genera mai multe valori deodată
