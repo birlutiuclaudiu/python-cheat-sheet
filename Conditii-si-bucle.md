@@ -1,6 +1,6 @@
-# `if`, `for`, `while`, `foreach` — Condiții și Bucle în Python
+# `if`, `for`, `while` — Condiții și Bucle în Python
 
-Acest document explică **structurile de control** din Python: condiția `if`/`elif`/`else`, bucla `while`, bucla `for` (inclusiv varianta „foreach" — parcurgerea directă a unei colecții), și modul în care `break`, `continue` și clauza `else` funcționează pe bucle.
+Acest document explică **structurile de control** din Python: condiția `if`/`elif`/`else`, bucla `while`, bucla `for` (inclusiv parcurgerea directă a elementelor unei colecții), și modul în care `break`, `continue` și clauza `else` funcționează pe bucle.
 
 ---
 
@@ -86,20 +86,6 @@ Output:
 
 ```
 Poate conduce.
-```
-
-## 1.5. `if` pe o Singură Linie (Expresie Ternară)
-
-```python
-varsta = 16
-status = "major" if varsta >= 18 else "minor"
-print(status)
-```
-
-Output:
-
-```
-minor
 ```
 
 ---
@@ -200,11 +186,11 @@ Output:
 
 ---
 
-# 4. `foreach` — Parcurgerea Directă a unei Colecții
+# 4. Parcurgerea Directă a unei Colecții cu `for`
 
-Python nu are un cuvânt cheie separat `foreach`; același `for` este folosit pentru a parcurge **direct elementele** unei colecții (listă, tuplu, string, dicționar), fără index — acesta este echivalentul „foreach" din alte limbaje.
+`for` poate parcurge **direct elementele** unei colecții (listă, tuplu, string, dicționar), fără a folosi un index.
 
-## 4.1. `foreach` pe o Listă
+## 4.1. Parcurgerea unei Liste
 
 ```python
 fructe = ["mar", "para", "banana"]
@@ -221,7 +207,7 @@ para
 banana
 ```
 
-## 4.2. `foreach` pe un String
+## 4.2. Parcurgerea unui String
 
 ```python
 for litera in "abc":
@@ -236,24 +222,7 @@ b
 c
 ```
 
-## 4.3. `foreach` cu Index — `enumerate()`
-
-```python
-fructe = ["mar", "para", "banana"]
-
-for index, fruct in enumerate(fructe):
-    print(index, "->", fruct)
-```
-
-Output:
-
-```
-0 -> mar
-1 -> para
-2 -> banana
-```
-
-## 4.4. `foreach` pe un Dicționar
+## 4.3. Parcurgerea unui Dicționar
 
 ```python
 student = {"nume": "Alice", "varsta": 20}
@@ -272,23 +241,6 @@ varsta : 20
 Explicație:
 
 Vezi [Dictionare.md](Dictionare.md) pentru mai multe detalii despre `.items()`, `.keys()` și `.values()`.
-
-## 4.5. `foreach` Paralel pe Mai Multe Liste — `zip()`
-
-```python
-nume = ["Ana", "Bogdan"]
-note = [9, 7]
-
-for n, nota in zip(nume, note):
-    print(n, "are nota", nota)
-```
-
-Output:
-
-```
-Ana are nota 9
-Bogdan are nota 7
-```
 
 ---
 
@@ -485,8 +437,7 @@ Condiția a devenit falsă, bucla s-a terminat normal.
 * `if` / `elif` / `else` — execută un bloc de cod în funcție de o condiție; doar primul bloc adevărat este rulat
 * `while` — repetă un bloc **atât timp cât** o condiție rămâne `True`; verifică condiția **înainte** de fiecare repetare
 * `for` — parcurge o secvență (des folosit cu `range()`)
-* „foreach" în Python **este** `for element in colectie` — parcurge direct elementele unei liste, string, dicționar (`.items()`), sau mai multe colecții deodată (`zip()`), fără index explicit
-* `enumerate()` oferă index + element atunci când ai nevoie și de poziție
+* `for element in colectie` — parcurge direct elementele unei liste, string sau dicționar (`.items()`), fără index explicit
 * `break` — oprește **complet** bucla curentă
 * `continue` — sare peste **restul iterației curente**, dar bucla continuă
 * `else` pe `for`/`while` — se execută **doar dacă** bucla s-a terminat normal, **fără** `break`; util pentru tipare de căutare ("nu am găsit nimic")
